@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <title>Gallery Component</title>
+</head>
+<body>
+   
+    <div id="app">
+        <h1>{{titulo}}</h1>
+        <mi-componente></mi-componente>
+
+    </div>
+   
+    
+    <!-----------------------------------------VUE CDN--------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+
+    <!------------------------------- SINGLE FILE COMPONENT---------------------------------------->
+    <script>
+        Vue.component("mi-componente",{
+            template: " <div>k tal</div>"
+        })
+        const app = new Vue({
+            el: "#app",
+            data: function(){
+                return{
+                    //objeto
+                    titulo: "saludo desde vue"
+                }
+            },
+            methods: {
+                //
+            },
+        })
+    </script>
+
+    <style scoped>
+        body{
+            background-image: url("assets/img/cropped-RM_page-header_background1-3.png");
+        }
+    </style>
+</body>
+</html>
