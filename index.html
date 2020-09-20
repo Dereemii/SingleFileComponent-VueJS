@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- https://github.com/Dereemii/SingleFileComponent-VueJS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/styles.css">
     <title>Gallery Component</title>
 </head>
 <body>
    
     <div id="app">
-        <h1>{{titulo}}</h1>
-        <mi-componente></mi-componente>
+
+        <gallery 
+        class="image" 
+        v-for="personaje in personajes"
+        v-bind:key="personaje.id"
+        :name_img="personaje.name"
+        :id="personaje.id"
+        :src_img="personaje.src">
+        </gallery>
 
     </div>
    
@@ -21,15 +28,41 @@
 
     <!------------------------------- SINGLE FILE COMPONENT---------------------------------------->
     <script>
-        Vue.component("mi-componente",{
-            template: " <div>k tal</div>"
-        })
+        Vue.component(`gallery`,{
+        props:{
+            name_img:{
+                type:String,
+                required:true,
+            },
+            id:{
+                type:Number,
+                required:true,
+            },
+            src_img:{
+                type:String,
+                required:true,
+            }
+        },
+        template: `
+        <div>
+            <img :src="src_img">
+            <h5>{{name_img}}</h5>
+        </div>
+        `
+    })
         const app = new Vue({
             el: "#app",
             data: function(){
                 return{
                     //objeto
-                    titulo: "saludo desde vue"
+                    personajes: [
+                    {name:'Rick Sanchez', id:1, src: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
+                    {name:'Morty Smith', id:2, src: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'},
+                    {name:'Summer Smith', id:3, src: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'},
+                    {name:'Beth Smith', id:4, src: 'https://rickandmortyapi.com/api/character/avatar/4.jpeg'},
+                    {name:'Jerry Smith', id:5, src: 'https://rickandmortyapi.com/api/character/avatar/5.jpeg'},
+                    {name:'Abadango Cluster', id:6, src: 'https://rickandmortyapi.com/api/character/avatar/6.jpeg'}
+                ]
                 }
             },
             methods: {
@@ -41,7 +74,28 @@
     <style scoped>
         body{
             background-image: url("assets/img/cropped-RM_page-header_background1-3.png");
+            color: white;
         }
+        .image{
+        display: flex;
+        grid-template-columns: 1fr 1fr;
+        width: 500px;
+        margin-top: 20px;
+        align-self: center;
+    }
+     img{
+        width: 10em;
+        border-radius: 50%;
+     }
+
+     h5{
+         text-align: center;
+         display: flex;
+         align-items: center;
+         margin: 20px;
+         color: green;
+         font-size:30px;
+     }
     </style>
 </body>
 </html>
